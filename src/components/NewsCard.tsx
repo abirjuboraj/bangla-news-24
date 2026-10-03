@@ -5,7 +5,7 @@ import Link from "next/link";
 const NewsCard = ({ news }: { news: MainNewsType }) => {
   return (
     <Link href={`/news/${news.id}`}>
-      <div className="group block overflow-hidden card bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ">
+      <div className="group block overflow-hidden card h-full bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ">
         <figure className="overflow-hidden">
           <Image
             src={news.imageUrl}
