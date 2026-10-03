@@ -16,17 +16,17 @@ export default async function Home() {
   return (
     <div>
       <div className="container mx-auto">
-        <div className="my-5 grid grid-cols-1 gap-10 px-5 lg:grid-cols-3">
+        <div className="my-3 grid grid-cols-1 gap-6 px-3 sm:my-4 sm:gap-8 sm:px-4 md:my-5 md:gap-10 md:px-5 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <MainNews news={mainNews}></MainNews>
+            <MainNews news={mainNews} />
 
             {otherSections.map((news: sectionType) => (
-              <NewsSections key={news.curationId} news={news}></NewsSections>
+              <NewsSections key={news.curationId} news={news} />
             ))}
           </div>
 
           <div className="lg:col-span-1">
-            <MostRead></MostRead>
+            <MostRead />
           </div>
         </div>
       </div>

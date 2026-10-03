@@ -2,7 +2,7 @@ import { MainNewsType } from "@/type/type";
 import Image from "next/image";
 import Link from "next/link";
 
-const NewsCard = ({ news }: { news: MainNewsType }) => {
+const NewsCard = ({ news, isMainNews = false }: { news: MainNewsType, isMainNews: boolean }) => {
   return (
     <Link href={`/news/${news.id}`}>
       <div className="group block overflow-hidden card h-full bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ">
@@ -21,7 +21,7 @@ const NewsCard = ({ news }: { news: MainNewsType }) => {
             {news.category}
           </span>
 
-          <h2 className="card-title text-base transition-colors duration-300 group-hover:text-red-500">
+          <h2 className={`card-title text-base transition-colors duration-300 group-hover:text-red-500 ${isMainNews ? "text-xl" : ""}`}>
             {news.title}
           </h2>
 

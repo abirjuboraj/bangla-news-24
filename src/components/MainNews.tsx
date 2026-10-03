@@ -8,9 +8,9 @@ const MainNews = ({ news }: { news: MainNewsType[] }) => {
   if (!firstNews) return null;
 
   return (
-    <div className="flex gap-5">
+    <div className="flex flex-col md:flex-row gap-5">
       <div className="flex-1">
-        <NewsCard news={firstNews}></NewsCard>
+        <NewsCard news={firstNews} isMainNews={true}></NewsCard>
       </div>
 
       <div className="flex-1">
