@@ -10,8 +10,8 @@ const Marque = async () => {
   const headLines: News[] = data.data;
 
   return (
-    <div className="bg-red-700 text-white ">
-      <div className="flex items-center max-w-7xl mx-auto">
+    <div className="bg-red-700 text-white  ">
+      <div className="flex items-center max-w-7xl mx-auto ">
         <div className="bg-red-800 p-2 font-bold">সর্বশেষ</div>
         <MarqueeText duration={10} direction="right">
           {headLines.map((news: News) => (

@@ -1,5 +1,5 @@
 import { MainNewsType, sectionType } from "@/type/type";
-import Image from "next/image";
+import NewsCard from "./NewsCard";
 
 const NewsSections = ({ news }: { news: sectionType }) => {
   const hasNews = news.articles.some((article) => article.type !== "link");
@@ -15,45 +15,7 @@ const NewsSections = ({ news }: { news: sectionType }) => {
         {news.articles
           .filter((article) => article.type !== "link")
           .map((article: MainNewsType) => (
-            <div
-              key={article.id}
-              className="group block overflow-hidden card bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg "
-            >
-              <figure className="overflow-hidden">
-                <Image
-                  src={article.imageUrl}
-                  alt={article.imageAlt}
-                  width={400}
-                  height={300}
-                  className="w-full transition-transform duration-500 group-hover:scale-105"
-                />
-              </figure>
-
-              <div className="card-body">
-                <span className="text-red-500 font-semibold text-sm">
-                  {article.category}
-                </span>
-
-                <h2 className="card-title text-base transition-colors duration-300 group-hover:text-red-500">
-                  {article.title}
-                </h2>
-
-                <p className="line-clamp-2 text-neutral-600 text-sm">
-                  {article.description}
-                </p>
-
-                <span className="text-neutral-500 text-xs">
-                  {new Date(article.firstPublished).toLocaleString("bn-BD", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-                </span>
-              </div>
-            </div>
+           <NewsCard  key={article.id} news={article}></NewsCard>
           ))}
       </div>
     </div>
