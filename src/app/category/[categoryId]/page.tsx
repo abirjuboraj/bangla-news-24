@@ -12,7 +12,7 @@ const CategoryNews = async({ params }: { params: Promise<{ categoryId: string }>
     const categoryNews:MainNewsType[] = data.data;
     console.log(categoryNews);
   return (
-    <div className="container mx-auto max-w-7xl  px-5 mt-3">
+    <div className="  px-5 mt-3">
         <h2 className="font-bold py-2 text-2xl border-b-3 border-red-500">
           {data.title}
         </h2>

@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <div>
       <div className="container mx-auto">
-        <div className="mx-auto my-5 grid max-w-7xl grid-cols-1 gap-10 px-5 lg:grid-cols-3">
+        <div className="my-5 grid grid-cols-1 gap-10 px-5 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <MainNews news={mainNews}></MainNews>
 

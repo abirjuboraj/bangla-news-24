@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="sticky top-0 z-50 bg-white">
           <Marque></Marque>
         </div>
-        <main>
+        <main className="container mx-auto max-w-7xl">
           {children}
         </main>
         <Footer></Footer>
