@@ -20,3 +20,25 @@ export type News = {
   title: string;
   type: string;
 };
+
+export type MainNewsType = {
+  category: string;
+  description: string;
+  firstPublished: string;
+  id:string;
+  imageAlt: string;
+  imageUrl: string;
+  isLive: boolean;
+  lastPublished: string;
+  link: string;
+  source: string;
+  title: string;
+  type: string;
+}
+
+export type sectionType = {
+  title: string;
+  curationId: string;
+  curationType: string;
+  articles: MainNewsType[];
+}

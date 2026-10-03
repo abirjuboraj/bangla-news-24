@@ -9,7 +9,6 @@ const Navlinks = async() => {
 
     const navs:NavlinkType[] = data.data;
 
-    console.log(navs);
 
     const filteredNavs = navs.filter((nav:NavlinkType) => nav.scrapable);
 
