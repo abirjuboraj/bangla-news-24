@@ -1,6 +1,7 @@
 "use client";
 
 import { signOut, useSession } from "@/lib/auth-client";
+import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -25,8 +26,16 @@ const UserInfo = () => {
       {user ? (
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-red-500 via-red-600 to-rose-700 text-xs font-bold text-white shadow-sm ring-2 ring-red-100 sm:h-9 sm:w-9 sm:text-sm">
-              {user.name?.charAt(0).toUpperCase()}
+            <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-red-500 via-red-600 to-rose-700 text-xs font-bold text-white shadow-sm ring-2 ring-red-100 sm:h-9 sm:w-9 sm:text-sm">
+              {user.image ? (
+                <Image
+                  src={user.image}
+                  alt={user.name || "User"}
+                  width={36} height={36} className="h-8 w-8 rounded-full object-cover sm:h-9 sm:w-9"
+                />
+              ) : (
+                user.name?.charAt(0).toUpperCase()
+              )}
             </div>
 
             <span className="hidden max-w-24 truncate text-sm font-semibold text-neutral-700 sm:block md:max-w-32 md:text-base">

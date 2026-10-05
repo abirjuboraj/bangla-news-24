@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "ichef.bbci.co.uk" }],
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 };
 

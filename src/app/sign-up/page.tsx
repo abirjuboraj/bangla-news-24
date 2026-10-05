@@ -1,37 +1,38 @@
-'use client';
-import { signUp } from "@/lib/auth-client";
+"use client";
+import { signIn, signUp } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
-
-
+import { FcGoogle } from "react-icons/fc";
 
 const SignUpPage = () => {
-
-  const onsubmit = async(e: React.SubmitEvent<HTMLFormElement>) => {
+  const onsubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
     const userData = Object.fromEntries(formData.entries());
 
-    const {data, error} = await signUp.email({
+    const { data, error } = await signUp.email({
       email: userData.email as string,
       password: userData.password as string,
       name: userData.name as string,
-      callbackURL: "/"
-    })
-    
-    if(data?.user){
-      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!") 
+      callbackURL: "/",
+    });
+
+    if (data?.user) {
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
       redirect("/");
     }
-    if(error){
+    if (error) {
       console.error(error.message || "অ্যাকাউন্ট তৈরি করা সম্ভব হয়নি।");
     }
+  };
 
-  }
+  const handleGoogleSignUp = async () => {
+    await signIn.social({ provider: "google" });
+  };
   return (
     <main className="flex min-h-[calc(100vh-140px)] items-center justify-center bg-gray-50 px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12">
       <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg sm:max-w-md sm:p-7 md:p-8">
@@ -133,6 +134,14 @@ const SignUpPage = () => {
             className="w-full rounded-lg bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 sm:py-3"
           >
             সাইন আপ
+          </button>
+          <button
+            type="button"
+            onClick={handleGoogleSignUp}
+            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+          >
+            {" "}
+            <FcGoogle size={20} /> Sign up with Google{" "}
           </button>
         </form>
 

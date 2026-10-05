@@ -2,8 +2,8 @@
 import { signIn } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 
 const SignInPage = () => {
   const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -28,6 +28,13 @@ const SignInPage = () => {
     if (data?.user) {
       toast.success("সফলভাবে সাইন ইন হয়েছে!");
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    await signIn.social({
+      provider: "google",
+     
+    });
   };
   return (
     <main className="flex min-h-[calc(100vh-140px)] items-center justify-center bg-gray-50 px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12">
@@ -102,6 +109,13 @@ const SignInPage = () => {
             className="w-full rounded-lg bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 sm:py-3"
           >
             সাইন ইন
+          </button>
+          <button
+            onClick={handleGoogleSignIn}
+            type="button"
+            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+          >
+            <FcGoogle size={20} /> Sign in with Google
           </button>
         </form>
 
