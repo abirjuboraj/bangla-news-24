@@ -15,6 +15,11 @@ const MainNews = ({ news }: { news: MainNewsType[] }) => {
 
       <div className="flex-1">
         <div className="border border-neutral-300 rounded-lg p-3">
+          <div>
+            <h2 className="text-xl font-semibold mb-2 pb-3 border-b-3 border-red-500">সর্বশেষ সংবাদ
+
+            </h2>
+          </div>
           {listedNews.slice(0, 4).map((newsItem, index) => (
             <Link key={newsItem.id} href={`/news/${newsItem.id}`}>
             <div

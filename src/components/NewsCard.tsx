@@ -12,7 +12,7 @@ const NewsCard = ({ news, isMainNews = false }: { news: MainNewsType, isMainNews
             alt={news.imageAlt}
             width={400}
             height={300}
-            className="w-full transition-transform duration-500 group-hover:scale-105"
+            className="w-full aspect-video relative overflow-hidden transition-transform duration-500 group-hover:scale-105"
           />
         </figure>
 

@@ -19,9 +19,9 @@ const Marque = async () => {
             <Link
               key={news.id}
               href={`/news/${news.id}`}
-              className="mx-3 transition-colors duration-300"
+              className=" hover:underline"
             >
-              <span className=" hover:underline">{news.title}</span>
+              <span>{news.title}</span>
               <span className="mx-3">•</span>
             </Link>
           ))}

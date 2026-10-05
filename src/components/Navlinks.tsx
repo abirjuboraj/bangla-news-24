@@ -6,6 +6,8 @@ const Navlinks = async () => {
     "https://news-api-v2.vercel.app/api/categories"
   );
 
+  if (!res.ok) throw new Error(`Failed: ${res.status}`);
+
   const data = await res.json();
 
   const navs: NavlinkType[] = data.data;

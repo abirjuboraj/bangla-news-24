@@ -13,7 +13,7 @@ const NewsDetailsPage = async ({
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch news");
+    throw new Error("Failed to fetch news details");
   }
 
   const data = await res.json();
