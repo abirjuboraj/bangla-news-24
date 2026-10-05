@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 const SignUpPage = () => {
@@ -33,6 +34,12 @@ const SignUpPage = () => {
   const handleGoogleSignUp = async () => {
     await signIn.social({ provider: "google" });
   };
+
+   const handleGithubSignUp = async () => {
+      await signIn.social({
+        provider: "github",
+      });
+    };
   return (
     <main className="flex min-h-[calc(100vh-140px)] items-center justify-center bg-gray-50 px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12">
       <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg sm:max-w-md sm:p-7 md:p-8">
@@ -135,15 +142,25 @@ const SignUpPage = () => {
           >
             সাইন আপ
           </button>
-          <button
-            type="button"
-            onClick={handleGoogleSignUp}
-            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
-          >
-            {" "}
-            <FcGoogle size={20} /> Sign up with Google{" "}
-          </button>
+          
         </form>
+
+        <div className="flex flex-col gap-2 mt-2">
+                  <button
+                  onClick={handleGoogleSignUp}
+                  type="button"
+                  className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                >
+                  <FcGoogle size={20} /> Sign up with Google
+                </button>
+                <button
+                  onClick={handleGithubSignUp}
+                  type="button"
+                  className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                >
+                  <FaGithub size={20} /> Sign up with Github
+                </button>
+                </div>
 
         <p className="mt-5 text-center text-xs text-gray-500 sm:mt-6 sm:text-sm">
           ইতোমধ্যে অ্যাকাউন্ট আছে?{" "}

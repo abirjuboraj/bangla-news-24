@@ -27,6 +27,7 @@ const UserInfo = () => {
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-red-500 via-red-600 to-rose-700 text-xs font-bold text-white shadow-sm ring-2 ring-red-100 sm:h-9 sm:w-9 sm:text-sm">
+              <Link href="/profile">
               {user.image ? (
                 <Image
                   src={user.image}
@@ -35,7 +36,7 @@ const UserInfo = () => {
                 />
               ) : (
                 user.name?.charAt(0).toUpperCase()
-              )}
+              )}</Link>
             </div>
 
             <span className="hidden max-w-24 truncate text-sm font-semibold text-neutral-700 sm:block md:max-w-32 md:text-base">

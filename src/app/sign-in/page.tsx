@@ -3,6 +3,7 @@ import { signIn } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 const SignInPage = () => {
@@ -33,7 +34,12 @@ const SignInPage = () => {
   const handleGoogleSignIn = async () => {
     await signIn.social({
       provider: "google",
-     
+    });
+  };
+
+  const handleGithubSignIn = async () => {
+    await signIn.social({
+      provider: "github",
     });
   };
   return (
@@ -110,14 +116,23 @@ const SignInPage = () => {
           >
             সাইন ইন
           </button>
-          <button
-            onClick={handleGoogleSignIn}
-            type="button"
-            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
-          >
-            <FcGoogle size={20} /> Sign in with Google
-          </button>
         </form>
+        <div className="flex flex-col gap-2 mt-2">
+          <button
+          onClick={handleGoogleSignIn}
+          type="button"
+          className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+        >
+          <FcGoogle size={20} /> Sign in with Google
+        </button>
+        <button
+          onClick={handleGithubSignIn}
+          type="button"
+          className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+        >
+          <FaGithub size={20} /> Sign in with Github
+        </button>
+        </div>
 
         <p className="mt-5 text-center text-xs text-gray-500 sm:mt-6 sm:text-sm">
           নতুন ব্যবহারকারী?{" "}
