@@ -1,17 +1,48 @@
+'use client';
+import { signUp } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
+
+
 
 const SignUpPage = () => {
+
+  const onsubmit = async(e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const userData = Object.fromEntries(formData.entries());
+
+    const {data, error} = await signUp.email({
+      email: userData.email as string,
+      password: userData.password as string,
+      name: userData.name as string,
+      callbackURL: "/"
+    })
+    
+    if(data?.user){
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!") 
+      redirect("/");
+    }
+    if(error){
+      console.error(error.message || "অ্যাকাউন্ট তৈরি করা সম্ভব হয়নি।");
+    }
+
+  }
   return (
-    <main className="flex min-h-[calc(100vh-140px)] items-center justify-center bg-gray-50 px-4 py-8 sm:py-12">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-        <div className="mb-8 text-center">
-          <div className="mb-3 flex justify-center">
+    <main className="flex min-h-[calc(100vh-140px)] items-center justify-center bg-gray-50 px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12">
+      <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg sm:max-w-md sm:p-7 md:p-8">
+        <div className="mb-6 text-center sm:mb-8">
+          <div className="mb-3 flex justify-center sm:mb-4">
             <Image
               src="/logo.webp"
               alt="Bangla News 24"
               width={55}
               height={55}
+              className="h-12 w-12 sm:h-14 sm:w-14"
             />
           </div>
 
@@ -19,16 +50,16 @@ const SignUpPage = () => {
             অ্যাকাউন্ট তৈরি করুন
           </h1>
 
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-1.5 text-xs text-gray-500 sm:mt-2 sm:text-sm">
             Bangla News 24-এর সাথে যুক্ত হোন
           </p>
         </div>
 
-        <form className="space-y-4">
+        <form onSubmit={onsubmit} className="space-y-3.5 sm:space-y-4">
           <div>
             <label
               htmlFor="name"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-1.5 block text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm"
             >
               আপনার নাম
             </label>
@@ -36,16 +67,17 @@ const SignUpPage = () => {
             <input
               id="name"
               type="text"
-              required
+              name="name"
               placeholder="আপনার নাম লিখুন"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 sm:px-4 sm:py-3"
             />
           </div>
 
           <div>
             <label
               htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-1.5 block text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm"
             >
               ইমেইল
             </label>
@@ -53,16 +85,17 @@ const SignUpPage = () => {
             <input
               id="email"
               type="email"
-              required
+              name="email"
               placeholder="আপনার ইমেইল লিখুন"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 sm:px-4 sm:py-3"
             />
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-1.5 block text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm"
             >
               পাসওয়ার্ড
             </label>
@@ -70,16 +103,17 @@ const SignUpPage = () => {
             <input
               id="password"
               type="password"
-              required
+              name="password"
               placeholder="একটি শক্তিশালী পাসওয়ার্ড দিন"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 sm:px-4 sm:py-3"
             />
           </div>
 
           <div>
             <label
               htmlFor="confirmPassword"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-1.5 block text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm"
             >
               পাসওয়ার্ড নিশ্চিত করুন
             </label>
@@ -87,22 +121,23 @@ const SignUpPage = () => {
             <input
               id="confirmPassword"
               type="password"
-              required
+              name="confirmPassword"
               placeholder="পাসওয়ার্ডটি আবার লিখুন"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 sm:px-4 sm:py-3"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-red-600 py-3 text-sm font-semibold text-white transition hover:bg-red-700"
+            className="w-full rounded-lg bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 sm:py-3"
           >
             অ্যাকাউন্ট তৈরি করুন
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
-          ইতোমধ্যে অ্যাকাউন্ট আছে?
+        <p className="mt-5 text-center text-xs text-gray-500 sm:mt-6 sm:text-sm">
+          ইতোমধ্যে অ্যাকাউন্ট আছে?{" "}
           <Link
             href="/sign-in"
             className="font-semibold text-red-600 hover:text-red-700"

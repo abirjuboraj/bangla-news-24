@@ -5,7 +5,6 @@ const MostRead = async () => {
   const res = await fetch("https://news-api-v2.vercel.app/api/news/most-read");
   const data = await res.json();
   const mostReadNews: MainNewsType[] = data.data;
-  console.log(mostReadNews);
   return (
     <div className="bg-white p-5 rounded-lg shadow-sm">
       <h2 className="mb-4 border-b-2 border-red-500 pb-2 text-xl font-semibold">
