@@ -1,7 +1,34 @@
+"use client";
+import { signIn } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignInPage = () => {
+  const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const userData = Object.fromEntries(formData.entries());
+
+    const { data, error } = await signIn.email({
+      email: userData.email as string,
+      password: userData.password as string,
+      rememberMe: true,
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error(error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।");
+      return;
+    }
+
+    if (data?.user) {
+      toast.success("সফলভাবে সাইন ইন হয়েছে!");
+    }
+  };
   return (
     <main className="flex min-h-[calc(100vh-140px)] items-center justify-center bg-gray-50 px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12">
       <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg sm:max-w-md sm:p-7 md:p-8">
@@ -25,7 +52,7 @@ const SignInPage = () => {
           </p>
         </div>
 
-        <form className="space-y-4 sm:space-y-5">
+        <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5">
           <div>
             <label
               htmlFor="email"
@@ -37,6 +64,7 @@ const SignInPage = () => {
             <input
               id="email"
               type="email"
+              name="email"
               placeholder="আপনার ইমেইল লিখুন"
               required
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 sm:px-4 sm:py-3"
@@ -51,29 +79,29 @@ const SignInPage = () => {
               >
                 পাসওয়ার্ড
               </label>
-
-              <Link
-                href="/forgot-password"
-                className="text-[11px] text-red-600 hover:text-red-700 sm:text-xs md:text-sm"
-              >
-                পাসওয়ার্ড ভুলে গেছেন?
-              </Link>
             </div>
 
             <input
               id="password"
               type="password"
+              name="password"
               placeholder="আপনার পাসওয়ার্ড লিখুন"
               required
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 sm:px-4 sm:py-3"
             />
+            <Link
+              href="/forgot-password"
+              className="text-[11px] text-red-600 hover:text-red-700 sm:text-xs md:text-sm"
+            >
+              পাসওয়ার্ড ভুলে গেছেন?
+            </Link>
           </div>
 
           <button
             type="submit"
             className="w-full rounded-lg bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 sm:py-3"
           >
-            প্রবেশ করুন
+            সাইন ইন
           </button>
         </form>
 
