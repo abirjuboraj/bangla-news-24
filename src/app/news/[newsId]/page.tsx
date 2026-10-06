@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { NewsDetailsType } from "@/type/type";
+import { notFound } from "next/navigation";
 
 const NewsDetailsPage = async ({
   params,
@@ -12,13 +13,14 @@ const NewsDetailsPage = async ({
     `https://news-api-v2.vercel.app/api/article/${newsId}`,
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch news details");
-  }
-
   const data = await res.json();
 
   const newsDetails: NewsDetailsType = data.data;
+
+  if(!newsDetails)
+  {
+    notFound();
+  }
 
   const publishedDate = new Date(newsDetails.firstPublished).toLocaleDateString(
     "bn-BD",
